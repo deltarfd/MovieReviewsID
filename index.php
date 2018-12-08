@@ -83,7 +83,8 @@
                             $result = $bot->replyText($event['replyToken'], $event['message']['text']);
                             return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
                         }        
-                      } else {
+                      } //message from single user
+                      else {
                         if($event['message']['type'] == 'text')
                         {
                             // send same message as reply to user
