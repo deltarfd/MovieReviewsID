@@ -1,0 +1,16 @@
+{
+    "name": "deltarfd/moviereviewsid",
+    "description": "Movie Reviews ID sebagai sarana mencari film",
+    "type": "project",
+    "require": {
+        "php": "^7.2",
+        "slim/slim": "^3.11",
+        "linecorp/line-bot-sdk": "^3.6"
+    },
+    "authors": [
+        {
+            "name": "Delta R F D",
+            "email": "deltarfd@live.com"
+        }
+    ]
+}
