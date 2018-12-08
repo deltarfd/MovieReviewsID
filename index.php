@@ -108,4 +108,13 @@
         return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
     });
 
+    $app->get('/profile/{userId}', function($req, $res) use ($bot)
+    {
+        // get user profile
+        $route  = $req->getAttribute('route');
+        $userId = $route->getArgument('userId');
+        $result = $bot->getProfile($userId);
+                 
+        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+    });
     $app->run();
