@@ -6,6 +6,9 @@
     use \LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
     use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
     use \LINE\LINEBot\MessageBuilder\StickerMessageBuilder;
+    use \LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+    use \LINE\LINEBot\MessageBuilder\AudioMessageBuilder;
+    use \LINE\LINEBot\MessageBuilder\VideoMessageBuilder;
     use \LINE\LINEBot\SignatureValidator as SignatureValidator;
      
     // set false for production
@@ -75,5 +78,17 @@
             } 
         }
     });
-     
+    $app->get('/pushmessage', function($req, $res) use ($bot)
+    {
+        // send push message to user
+        $userId = 'U001681440b0dbd195aa130a7abff67b4';
+        $textMessageBuilder = new TextMessageBuilder('Halo Salam kenal ! Saya Movie Reviews ID siap membantu anda untuk mencari film-film berkualitas.');
+        $stickerMessageBuilder = new StickerMessageBuilder(1, 179);
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder);
+        $multiMessageBuilder->add($stickerMessageBuilder);
+        $result = $bot->pushMessage($userId, $multiMessageBuilder);
+       
+        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+    });
     $app->run();
