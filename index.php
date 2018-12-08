@@ -83,7 +83,7 @@
         // send push message to user
         $userId = 'U001681440b0dbd195aa130a7abff67b4';
         $textMessageBuilder = new TextMessageBuilder('Halo Salam kenal ! Saya Movie Reviews ID siap membantu anda untuk mencari film-film berkualitas.');
-        $stickerMessageBuilder = new StickerMessageBuilder(1, 179);
+        $stickerMessageBuilder = new StickerMessageBuilder(2, 179);
         $multiMessageBuilder = new MultiMessageBuilder();
         $multiMessageBuilder->add($textMessageBuilder);
         $multiMessageBuilder->add($stickerMessageBuilder);
@@ -91,4 +91,21 @@
        
         return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
     });
+    $app->get('/multicast', function($req, $res) use ($bot)
+    {
+        // list of users
+        $userList = [
+            'U001681440b0dbd195aa130a7abff67b4',
+            'U001681440b0dbd195aa130a7abff67b4',
+            'U001681440b0dbd195aa130a7abff67b4',
+            'U001681440b0dbd195aa130a7abff67b4',
+            'U001681440b0dbd195aa130a7abff67b4'];
+     
+        // send multicast message to user
+        $textMessageBuilder = new TextMessageBuilder('Halo, ini pesan multicast');
+        $result = $bot->multicast($userList, $textMessageBuilder);
+       
+        return $res->withJson($result->getJSONDecodedBody(), $result->getHTTPStatus());
+    });
+
     $app->run();
